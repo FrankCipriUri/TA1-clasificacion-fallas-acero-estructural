@@ -1,4 +1,4 @@
-# ia-control-calidad-acero
+# TA1-CLASIFICACIÓN DE FALLAS DE ACERO ESTRUCTURAL
 
 ### Clasificación automática de fallas superficiales en planchas de acero estructural mediante Machine Learning, para apoyar el control de calidad en la industria siderúrgica.
 
