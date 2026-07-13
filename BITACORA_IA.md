@@ -21,16 +21,14 @@ se documenta íntegramente por transparencia, tal como exige el curso.
 
 ## Detalle de prompts e iteraciones
 
-1. **Prompt inicial:** solicitud de ayuda para culminar T1 — identificar un problema de
-   ingeniería estructural viable, con datos reales tabulables en CSV, y redactar el
-   informe con referencias, siguiendo los lineamientos del curso (documento de la
-   rúbrica proporcionado como contexto).
+1. **Prompt inicial:** solicitud de identificación de un problema de
+   ingeniería estructural viable, con datos reales tabulables en CSV.
 
 2. **Iteración — selección de dataset (concreto):** la IA propuso, a partir del Anexo
    de datasets sugeridos por el docente, el dataset de resistencia del concreto (UCI)
    como primera opción por ser tabular y de bajo costo computacional. Se descargó,
    validó (1030 filas, 9 columnas, sin nulos, estadísticos coincidentes con la
-   literatura de Yeh, 1998) y se generó el informe correspondiente.
+   literatura de Yeh, 1998).
 
 3. **Iteración — cambio a daño sísmico:** el equipo solicitó una problemática distinta,
    relacionada con predicción de daño estructural por sismos. La IA identificó y validó
@@ -43,21 +41,13 @@ se documenta íntegramente por transparencia, tal como exige el curso.
    Plates Faults, Semeion Research Center, DOI 10.24432/C5J88N). La IA validó el
    dataset (1941 filas, 34 columnas, distribución de clases exacta: Other_Faults=673,
    Bumps=402, K_Scatch=391, Z_Scratch=190, Pastry=158, Stains=72, Dirtiness=55),
-   tradujo las columnas al español y reescribió el informe final.
+   tradujo las columnas al español..
 
 5. **Iteración — marco VDS/PCS:** se solicitó el análisis bajo los principios de
-   Predictibilidad, Computabilidad y Estabilidad (Yu & Barter, 2024). La IA propuso el
+   Predictibilidad, Computabilidad y Estabilidad (Yu & Barter, 2024). Se propuso el
    contenido de cada principio aplicado al dataset final, incluyendo la observación
    sobre desbalance de clases y la recomendación de usar F1-macro/balanced accuracy en
    lugar de accuracy para T2/T3 — comentario que el docente destacó positivamente.
-
-6. **Iteración — cuadro VDS independiente:** se solicitó un documento Word aparte,
-   en formato horizontal, con el cuadro resumen del marco VDS para la exposición
-   en clase.
-
-7. **Iteración — README y nombre del repositorio:** se solicitaron alternativas de
-   nombre para el repositorio; el equipo escogió `ia-control-calidad-acero`, y se
-   actualizó el README.md con ese título y su descripción.
 
 ## Evidencia de originalidad y fuentes primarias
 
