@@ -1,5 +1,0 @@
-modelo,f1_macro,balanced_accuracy,accuracy
-SVM (baseline),0.7374,0.7999,0.7172
-Random Forest (principal),0.8188,0.7894,0.7995
-XGBoost (comparación),0.8131,0.8051,0.8021
-Random Forest + SMOTE,0.8306,0.8257,0.7995
