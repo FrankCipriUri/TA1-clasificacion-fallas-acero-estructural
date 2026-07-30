@@ -26,9 +26,9 @@ Este trabajo, desarrollado en tres entregas escalonadas (T1, T2 y T3) siguiendo 
 
 ### A. Dataset
 
-Se utilizó el dataset *Steel Plates Faults* [1], desarrollado por el Semeion Research Center (Italia) y publicado en el UCI Machine Learning Repository (DOI [10.24432/C5J88N](https://doi.org/10.24432/C5J88N)). Contiene **1,941 planchas de acero** inspeccionadas, con **27 variables predictoras** numéricas (geometría del defecto, luminosidad, tipo e índices de forma) y una variable objetivo categórica con 7 clases: `Pastry`, `Z_Scratch`, `K_Scatch`, `Stains`, `Dirtiness`, `Bumps` y `Other_Faults`. El dataset no presenta valores nulos ni duplicados (ver [`data/steel_plates_faults.csv`](../data/steel_plates_faults.csv)).
+Se utilizó el dataset *Steel Plates Faults* [1], desarrollado por el Semeion Research Center (Italia) y publicado en el UCI Machine Learning Repository (DOI [10.24432/C5J88N](https://doi.org/10.24432/C5J88N)). Contiene **1,941 planchas de acero** inspeccionadas, con **27 variables predictoras** numéricas (geometría del defecto, luminosidad, tipo e índices de forma) y una variable objetivo categórica con 7 clases: `Pastry`, `Z_Scratch`, `K_Scatch`, `Stains`, `Dirtiness`, `Bumps` y `Other_Faults`. El dataset no presenta valores nulos ni duplicados (ver [`data/steel_plates_faults.csv`](data/steel_plates_faults.csv)).
 
-El análisis exploratorio (T2, ver [`notebooks/EDA_T2.ipynb`](../notebooks/EDA_T2.ipynb)) identificó dos hallazgos determinantes para el diseño experimental:
+El análisis exploratorio (T2, ver [`notebooks/EDA_T2.ipynb`](notebooks/EDA_T2.ipynb)) identificó dos hallazgos determinantes para el diseño experimental:
 - Un **desbalance de clases** marcado (`Other_Faults` = 34.7% de los casos, `Dirtiness` = 2.8%).
 - **Multicolinealidad** fuerte entre varias variables (p. ej. `y_minimo_px` con `y_maximo_px`, r ≈ 1.0).
 
@@ -50,7 +50,7 @@ Se descartaron algoritmos de clustering, por tratarse de un problema supervisado
 
 ### C.1 Código fuente — `src/modelamiento_t3.py`
 
-> El siguiente es el código completo utilizado para el entrenamiento y evaluación de los 4 modelos (SVM, Random Forest, XGBoost, Random Forest+SMOTE). **Actualización:** las rutas de `data/` y `results/` ahora están ancladas a la ubicación del propio archivo (`os.path.dirname(os.path.abspath(__file__))`), no a la carpeta desde la que se ejecute — esto permite correr el script indistintamente desde la terminal (con o sin `cd src`) o con el botón ▶️ ("Run Python File") de VS Code, sin errores de archivo no encontrado. También disponible como archivo ejecutable en [`src/modelamiento_t3.py`](../src/modelamiento_t3.py).
+> El siguiente es el código completo utilizado para el entrenamiento y evaluación de los 4 modelos (SVM, Random Forest, XGBoost, Random Forest+SMOTE). **Actualización:** las rutas de `data/` y `results/` ahora están ancladas a la ubicación del propio archivo (`os.path.dirname(os.path.abspath(__file__))`), no a la carpeta desde la que se ejecute — esto permite correr el script indistintamente desde la terminal (con o sin `cd src`) o con el botón ▶️ ("Run Python File") de VS Code, sin errores de archivo no encontrado. También disponible como archivo ejecutable en [`src/modelamiento_t3.py`](src/modelamiento_t3.py).
 
 ```python
 """
@@ -352,11 +352,11 @@ Dado el desbalance de clases, se adoptó **F1-macro** como métrica principal de
 
 Se generaron Partial Dependence Plots (PDP) [4] y explicaciones SHAP [5] enfocadas específicamente en el par de clases `Stains` y `Dirtiness`, identificado en el EDA como el más propenso a confundirse por compartir defectos de bordes difusos.
 
-**Código fuente:** [`src/modelamiento_t3.py`](../src/modelamiento_t3.py) (entrenamiento y evaluación) y [`src/interpretabilidad_t3.py`](../src/interpretabilidad_t3.py) (PDP y SHAP).
+**Código fuente:** [`src/modelamiento_t3.py`](src/modelamiento_t3.py) (entrenamiento y evaluación) y [`src/interpretabilidad_t3.py`](src/interpretabilidad_t3.py) (PDP y SHAP).
 
 ### E.1 Código fuente — `src/interpretabilidad_t3.py`
 
-> Código completo utilizado para generar los Partial Dependence Plots y la explicación SHAP. **Actualización:** misma corrección de rutas que en `modelamiento_t3.py`, ancladas a la ubicación del archivo — funciona igual con el botón ▶️ de VS Code o desde la terminal. También disponible en [`src/interpretabilidad_t3.py`](../src/interpretabilidad_t3.py).
+> Código completo utilizado para generar los Partial Dependence Plots y la explicación SHAP. **Actualización:** misma corrección de rutas que en `modelamiento_t3.py`, ancladas a la ubicación del archivo — funciona igual con el botón ▶️ de VS Code o desde la terminal. También disponible en [`src/interpretabilidad_t3.py`](src/interpretabilidad_t3.py).
 
 ```python
 """
@@ -539,13 +539,13 @@ La Tabla II resume el desempeño de los cuatro modelos evaluados sobre el conjun
 | XGBoost | 0.813 | 0.805 | 0.802 |
 | **Random Forest + SMOTE** ⭐ | **0.831** | **0.826** | 0.800 |
 
-*(tabla también disponible en [`results/tabla_comparativa.csv`](../results/tabla_comparativa.csv))*
+*(tabla también disponible en [`results/tabla_comparativa.csv`](results/tabla_comparativa.csv))*
 
 Random Forest con SMOTE obtuvo el mejor F1-macro (0.831) y balanced accuracy (0.826), superando al baseline SVM en 9.4 y 2.6 puntos porcentuales respectivamente, y también al Random Forest sin remuestreo (+1.2 puntos de F1-macro). XGBoost obtuvo un desempeño intermedio, sin justificar su menor interpretabilidad frente a la mejora obtenida.
 
 **Fig. 1. Matriz de confusión — Random Forest + SMOTE (modelo final)**
 
-![Matriz de confusión Random Forest + SMOTE](../results/cm_rf_smote.png)
+![Matriz de confusión Random Forest + SMOTE](results/cm_rf_smote.png)
 
 La matriz de confusión del modelo final muestra que la mayoría de los errores se concentran en `Bumps` y `Other_Faults`, mientras que las clases `K_Scatch`, `Stains` y `Dirtiness` alcanzan un desempeño alto — contrario a lo anticipado inicialmente en el EDA para este último par.
 
@@ -553,7 +553,7 @@ La matriz de confusión del modelo final muestra que la mayoría de los errores 
 
 **Fig. 2. Importancia de variables — Random Forest (top 15)**
 
-![Importancia de variables](../results/feature_importances.png)
+![Importancia de variables](results/feature_importances.png)
 
 Las variables más relevantes fueron `longitud_transportador`, `log_area` y `area_pixeles`, confirmando que los descriptores de tamaño y geometría del defecto son los principales determinantes de la clasificación, en línea con lo observado en el EDA (T2).
 
@@ -561,13 +561,13 @@ Las variables más relevantes fueron `longitud_transportador`, `log_area` y `are
 
 **Fig. 3. Partial Dependence Plot — clase Dirtiness**
 
-![PDP Dirtiness](../results/pdp_dirtiness.png)
+![PDP Dirtiness](results/pdp_dirtiness.png)
 
 El PDP confirma que la probabilidad de la clase `Dirtiness` aumenta en valores altos de `indice_bordes`, consistente con la hipótesis del EDA de que esta falla, al carecer de un contorno definido, se distingue principalmente por su patrón difuso de bordes más que por su luminosidad.
 
 **Fig. 4. Explicación SHAP de una predicción individual real** (clase verdadera: `Dirtiness`, correctamente clasificada)
 
-![SHAP caso individual](../results/shap_caso_individual.png)
+![SHAP caso individual](results/shap_caso_individual.png)
 
 Para el caso individual analizado, la variable `indice_bordes` fue la de mayor contribución positiva a la predicción, seguida por `luminosidad_minima`, validando de forma cuantitativa y a nivel de caso individual el patrón detectado de forma agregada en el EDA y el PDP.
 
